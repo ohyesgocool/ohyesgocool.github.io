@@ -1,10 +1,3 @@
-/*
-	Tooltip Tool
-
-	http://imperavi.com/kube/
-
-	Copyright (c) 2009-2014, Imperavi LLC.
-*/
 (function($)
 {
 	// Plugin
