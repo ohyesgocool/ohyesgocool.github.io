@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scalability</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+            position: relative;
+        }
+        h1 {
+            text-align: center;
+        }
+        hr {
+            margin: 20px 0;
+            border: none;
+            border-top: 1px solid #ccc;
+        }
+        p {
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 5px;
+            border-radius: 5px;
+            display: block;
+        }
+        .code-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            padding: 5px 10px;
+            background-color: #2383eac7;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .copied-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+        .container img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Beyond Boundaries — Unveiling the Art of Scalability</h1>
+        <img src="/img/blogimg/scalability/scalability.png">
+        <hr>
+        <h2>Scalability</h2>
+        <p>As the system grows (in data volume, traffic volume, or complexity), there should be reasonable ways of dealing with that growth. A service is said to be scalable if when we increase the resources in a system, it results in increased performance in a manner proportional to resources added.</p>
+
+        <h2>Performance vs Scalability 📈</h2>
+        <p>Performance and scalability are two related but distinct aspects of a system. Another way to look at performance vs scalability:</p>
+        <ul>
+            <li>If you have a performance problem, your system is slow for a single user.</li>
+            <li>If you have a scalability problem, your system is fast for a single user but slow under heavy load.</li>
+        </ul>
+
+        <h2>Performance</h2>
+        <p>Factors such as network latency, bandwidth, and other elements also affect performance. Everything works on trade-offs. For instance, in order to increase performance, we could optimize the code, database, or network, which can improve performance, but it can also reduce flexibility, modularity, or maintainability.</p>
+
+        <h2>Scalability</h2>
+        <p>Scalability is the ability of the system to handle a large amount of work when the system is under heavy load by adding more resources to the problem. Scalability is not a 1D label; it means asking questions like, “if a system grows in a particular way, what are our options for coping up with this growth without reducing the performance?” There are two ways of scaling basically, Vertical (Scaling up) and horizontal (Scaling out).</p>
+
+        <h3>Basic Steps to Consider:</h3>
+        <ol>
+            <li><strong>Describe the load 📚</strong> — What kind of load are we expecting? It can be anything, could be requests per second for a web server or read and write per second for a Database, to define what we expect and how we can design a system to handle this.</li>
+            <li><strong>Describe the performance</strong> — Now that we have an increased load, what is the scope of performance? Would this load make an impact directly to the user interface, or would it be okay to be handled like a back office? Depending on various situations, decisions have to be considered and made.</li>
+        </ol>
+
+        <h2>Horizontal Scaling and Vertical Scaling</h2>
+        <p><strong>Vertical scaling 🚦</strong> is generally used in monolithic architecture where the service (Existing) is scaled up by increasing CPU power, memory, or storage capacity to accommodate the increased demands of your application.</p>
+
+        <p><strong>Horizontal scalability 🚥</strong>, or “scaling out,” refers to the expansion of an application by adding more hardware or nodes to distribute the workload. This is achieved by adding physical or virtual machines, which work in parallel to increase processing power and capacity. Also, one important aspect to keep in mind with respect to Horizontal scalability is that our a system is not horizontally scalable if the code design does not allow multiple servers to respond to requests. A good example of a system that is horizontally scalable but not vertically scalable is a distributed NoSQL database like Cassandra or MongoDB.</p>
+
+        <h2>Resources:</h2>
+        <ul>
+            <li><a href="https://www.slideshare.net/slideshow/scalability-availability-stability-patterns/4062682">Scalability, Availability & Stability Patterns</a></li>
+            <li><a href="https://www.allthingsdistributed.com/2006/03/a_word_on_scalability.html">A Word on Scalability</a></li>
+            <li><a href="https://highscalability.com/six-lessons-learned-the-hard-way-about-scaling-a-million-use/">Six Lessons Learned The Hard Way About Scaling A Million User System</a></li>
+        </ul>
+    </div>
+
+    <div class="copied-notification" id="copiedNotification">Copied!</div>
+
+    <script>
+        function copyCode() {
+            var code = document.querySelector('pre code');
+            var range = document.createRange();
+            range.selectNode(code);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            document.execCommand("copy");
+            window.getSelection().removeAllRanges();
+
+            // Show copied notification
+            var copiedNotification = document.getElementById('copiedNotification');
+            copiedNotification.style.display = 'block';
+
+            // Hide notification after 3 seconds
+            setTimeout(function() {
+                copiedNotification.style.display = 'none';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

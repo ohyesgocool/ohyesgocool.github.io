@@ -1,5 +1,11 @@
 // blogs.js
 const blogs = [
+  {
+    heading: "Beyond Boundaries — Unveiling the Art of Scalability",
+    link: "scalability.html",
+    date: "January 1, 2022",
+    numberOfWords : 500 
+  },
    {
       heading: "Liquibase Tutorial",
       link: "liquibase.html",
