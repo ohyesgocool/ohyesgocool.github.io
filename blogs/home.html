@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px; /* Add margin to the body */
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px; /* Add margin at the bottom of the heading */
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        li {
+            margin-bottom: 10px;
+            padding: 30px; /* Add padding to list items */
+            background-color: #f9f9f9; /* Add background color to list items */
+            border-radius: 5px; /* Add border radius to list items */
+        }
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        span {
+            margin-left: 10px;
+            font-style: italic;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <h1>Blogs</h1>
+    <ul id="blogList"></ul> <!-- Empty list to dynamically populate blogs -->
+    
+    <script type="text/javascript" src="blogs.js"></script>
+
+    <script>
+        // Function to dynamically populate the blog list
+        function populateBlogList() {
+            console.log('populateBlogList called'); // Debugging line
+            const blogList = document.getElementById('blogList');
+            console.log(blogs); // Debugging line to check the blogs array
+            blogs.forEach(blog => {
+                console.log(blog); // Debugging line to check each blog object
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = blog.link;
+                a.textContent = blog.heading;
+                const span = document.createElement('span');
+                span.textContent = blog.date;
+                li.appendChild(a);
+                li.appendChild(span);
+                blogList.appendChild(li);
+            });
+        }
+
+        populateBlogList(); // Call the function to populate the blog list
+    </script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appium — Dealing with FLAG_SECURE enabled in application</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 30px;
+            position: relative;
+        }
+        h1 {
+            text-align: center;
+        }
+        hr {
+            margin: 20px 0;
+            border: none;
+            border-top: 1px solid #ccc;
+        }
+        p {
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 5px;
+            border-radius: 5px;
+            display: block; /* Ensure code blocks are displayed as block elements */
+        }
+        .code-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            padding: 5px 10px;
+            background-color: #2383eac7;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .copied-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Appium — Dealing with FLAG_SECURE enabled in application</h1>
+        <hr>
+        <div>
+            <p>Applications like Netflix do not allow users to capture screen by enabling FLAG_SECURE ON. This is often done due to security constraints, most of the banking applications also do not allow you to take screenshots of the application. In such cases, while trying to automate, we won't be able to take a screen dump via UiAutomator viewer or using Appium desktop. However, for testing purposes, developers can make a debug build that has the FLAG_SECURE flag removed/turned off.</p>
+            <p>If it’s not possible to turn off the FLAG, one approach we can follow is using driver.getPageSource() from Appium client code which will return element hierarchy in XML which you can use for building a locator.</p>
+            <div class="code-container">
+                <pre><code>String elementHierarchy = driver.getPageSource();</code></pre>
+                <button class="copy-btn" onclick="copyCode()">Copy</button>
+            </div>
+            <p>Once you get the elementHierarchy, you can find necessary elements. It won't be as convenient as it would be with UiAutomator viewer or using Appium desktop, but it's still very much possible.</p>
+            <p>Hope this helps, Happy coding ❤️</p>
+        </div>
+    </div>
+
+    <div class="copied-notification" id="copiedNotification">Copied!</div>
+
+    <script>
+        function copyCode() {
+            var code = document.querySelector('pre code');
+            var range = document.createRange();
+            range.selectNode(code);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            document.execCommand("copy");
+            window.getSelection().removeAllRanges();
+
+            // Show copied notification
+            var copiedNotification = document.getElementById('copiedNotification');
+            copiedNotification.style.display = 'block';
+
+            // Hide notification after 3 seconds
+            setTimeout(function() {
+                copiedNotification.style.display = 'none';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

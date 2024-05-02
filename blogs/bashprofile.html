@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How do I edit $PATH (.bash_profile) on OSX?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 30px;
+            position: relative;
+        }
+        h1 {
+            text-align: center;
+        }
+        .separator {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border-top: 1px solid #ccc;
+        }
+        hr {
+            margin: 20px 0;
+            border: none;
+            border-top: 1px solid #ccc;
+        }
+        ol {
+            list-style-type: decimal;
+            margin-left: 20px;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 5px;
+            border-radius: 5px;
+            display: block;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            position: relative;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            padding: 5px 10px;
+            background-color: #2383eac7;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .copied-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Heading - How do I edit $PATH (.bash_profile) on OSX?</h1>
+        <div class="separator"></div>
+        <h2>Content:</h2>
+        <ol>
+            <li>Start up Terminal.</li>
+            <li>Type “cd ~/” to go to your home folder.</li>
+            <li>Type “touch .bash_profile” to create your new file. If you have already created it, open it using <code>open -e .bash_profile</code> to open it in TextEdit.</li>
+            <li>Paste the following:</li>
+        </ol>
+        <pre>
+            <code>
+export JAVA_HOME=$(/usr/libexec/java_home)
+export ANDROID_HOME=/Users/$USER/Library/Android/sdk
+export ANDROID_SDK_HOME=/Users/$USER/Library/Android/sdk
+export ANDROID_SDK_ROOT=/Users/$USER/Library/Android/sdk
+export ANDROID_AVD_HOME=/Users/$USER/.android/avd
+export PATH=$ANDROID_HOME/platform-tools:$PATH
+export PATH=$ANDROID_HOME/build-tools/30.0.2:$PATH
+export PATH=$ANDROID_HOME/emulator
+export PATH=$ANDROID_HOME/tools:$PATH
+export PATH=/usr/local/bin:$PATH
+export PATH=${PATH}:$ANDROID_HOME/platform-tools:$ANDROID_AVD_HOME
+            </code>
+            <button class="copy-btn" onclick="copyCode()">Copy</button>
+        </pre>
+        <div class="copied-notification" id="copiedNotification">Copied!</div>
+        <ol start="5">
+            <li>Type “source .bash_profile” to reload.</li>
+        </ol>
+    </div>
+
+    <script>
+        function copyCode() {
+            var code = document.querySelector('pre code');
+            var range = document.createRange();
+            range.selectNode(code);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            document.execCommand("copy");
+            window.getSelection().removeAllRanges();
+
+            // Show copied notification
+            var copiedNotification = document.getElementById('copiedNotification');
+            copiedNotification.style.display = 'block';
+
+            // Hide notification after 3 seconds
+            setTimeout(function() {
+                copiedNotification.style.display = 'none';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
