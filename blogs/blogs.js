@@ -1,5 +1,10 @@
 // blogs.js
 const blogs = [
+   {
+      heading: "Liquibase Tutorial",
+      link: "liquibase.html",
+      date: "January 1, 2022"
+    },
     {
       heading: "Appium — Dealing with FLAG_SECURE enabled in application",
       link: "appium.html",

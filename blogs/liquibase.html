@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liquibase Tutorial</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            padding: 30px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        h2 {
+            color: #1a73e8;
+        }
+        h3 {
+            color: #1a73e8;
+            margin-top: 20px;
+        }
+        strong {
+            font-weight: bold;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            position: relative;
+            margin-top: 20px;
+        }
+        pre code {
+            display: block;
+        }
+        .copied-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h2>Setting up Liquibase in Spring</h2>
+    <img src="/img/blogimg/liquibase/logoliquibase.png">
+    <hr>
+
+    <h3><strong>Whats about Liquibase?</strong></h3>
+    <p>Liquibase in simple terms is an open-source library that allows developers to track, version, and deploy database schema changes. Using Liquibase you can define database changes in a human-readable, database-independent XML or YAML format, and Liquibase will apply those changes to your database. It suits well since it's Database independent and can easily be integrated with any build tools like Maven or Gradle and CI/CD pipeline to automate the process of changing or creating a database across various environments. Liquibase also supports rollbacks and validation of database changes.</p>
+
+
+    <h3><strong>Changelogs and Changesets</strong></h3>
+    <p>Changelogs contain a series of database changes that have to be applied by Liquibase. It would mostly be YAML or XML. It could be any command which has to be run on a database engine that ranges from creating or modifying tables, indexes, and foreign keys. Each change is defined as a changeSet in the changelog file, which includes a unique ID, author, and a description of the change. Liquibase uses these attributes to keep track of which changes have already been applied to the database. Once the changelog file is executed and applied to a database, it automatically keeps track of the subsequent changes that are made and updates things accordingly.</p>
+    
+
+    <h3><strong>Get your hands dirty now 🛠👨🏾‍💻</strong></h3>
+    <p>Now let's create a sample Spring project and an in-memory database to test the same. Here I will be using Java but again it's language independent, so feel free to try it out with any language that you have hands-on!</p>
+    <img src="image_url_here" alt="Sample Spring project">
+ 
+
+    <h3><strong>MasterChangeLog:</strong></h3>
+    <pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd"&gt;
+
+    &lt;include file="v1-add-laptop-table.xml" relativeToChangelogFile="true"/&gt;
+
+&lt;/databaseChangeLog&gt;</code></pre>
+
+
+    <h3><strong>DatabaseChangeLog:</strong></h3>
+    <pre><code>&lt;databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd"&gt;
+
+    &lt;changeSet author="gokulmenon" id="create laptoptable"&gt;
+        &lt;comment&gt;create generated_documents table&lt;/comment&gt;
+        &lt;sql&gt;
+            CREATE TABLE laptop
+            (
+                id                BIGSERIAL PRIMARY KEY,
+                model_name  VARCHAR   NOT NULL,
+                manufacturer            VARCHAR   NOT NULL,
+                storage       VARCHAR   NOT NULL,
+                colour            VARCHAR
+            );
+        &lt;/sql&gt;
+    &lt;/changeSet&gt;
+
+&lt;/databaseChangeLog&gt;</code></pre>
+ 
+
+    <h3><strong>Configure Liquibase with H2 Database:</strong></h3>
+    <pre><code>liquibase.change-log = classpath:db/changelog/changelog-master.xml
+liquibase.url= jdbc:h2:mem:testdb
+liquibase.password=password
+liquibase.user=sa
+liquibase.enabled=true
+
+
+spring.datasource.url=jdbc:h2:mem:testdb
+spring.datasource.driverClassName=org.h2.Driver
+spring.datasource.username=sa
+spring.datasource.password=password
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+    </code></pre>
+
+    <p>Now let's navigate to the test package and test this functionality quickly with a simple test:</p>
+    <img src="image_url_here" alt="Test functionality">
+
+
+    <p>Now if I run and query my logs, we can see that Liquibase is creating a table on the go and inserting the fields which we have mentioned and also querying them while fetching it:</p>
+    <img src="image_url_here" alt="Query logs">
+
+
+    <p>After running the changelog, you can verify that the data has been inserted correctly into the H2 database by querying the database using a tool such as H2’s built-in console, or by using a JDBC driver to connect to the database from your application code. This approach can be useful for managing small to medium-sized datasets or for bootstrapping a new database with initial data.</p>
+ 
+
+    <p>You can checkout the entire project in my <a href="github_link_here">GitHub</a>. Thanks for reading my post! If you’d like to connect with me and stay up-to-date on my latest articles, please feel free to follow me on <a href="twitter_link_here">Twitter</a> and connect with me on <a href="linkedin_link_here">LinkedIn</a>. I’m always looking to engage with fellow tech enthusiasts and discuss the latest industry trends! Drop me a message and let’s connect.</p>
+
+
+    <p>Happy coding ☕️ 🎧 ❤️</p>
+
+    <div class="copied-notification" id="copiedNotification">Copied!</div>
+
+    <script>
+        // JavaScript code can be retained if you need it for other functionalities.
+    </script>
+</body>
+</html>
