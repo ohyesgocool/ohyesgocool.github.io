@@ -44,6 +44,13 @@
     <script type="text/javascript" src="blogs.js"></script>
 
     <script>
+        // Function to calculate reading time based on number of words
+        function calculateReadingTime(numberOfWords) {
+            const wordsPerMinute = 200; // Adjust as needed
+            const minutes = Math.ceil(numberOfWords / wordsPerMinute);
+            return minutes;
+        }
+
         // Function to dynamically populate the blog list
         function populateBlogList() {
             console.log('populateBlogList called'); // Debugging line
@@ -56,7 +63,8 @@
                 a.href = blog.link;
                 a.textContent = blog.heading;
                 const span = document.createElement('span');
-                span.textContent = blog.date;
+                const readingTime = calculateReadingTime(blog.numberOfWords);
+                span.textContent = `${readingTime} min read | ${blog.date}`;
                 li.appendChild(a);
                 li.appendChild(span);
                 blogList.appendChild(li);

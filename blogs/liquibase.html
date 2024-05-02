@@ -12,8 +12,10 @@
             max-width: 700px;
             margin: 0 auto;
         }
-        h2 {
-            color: #1a73e8;
+        h1 {
+            color: #080808;
+            text-align: center;
+        
         }
         h3 {
             color: #1a73e8;
@@ -52,7 +54,7 @@
     </style>
 </head>
 <body>
-    <h2>Setting up Liquibase in Spring</h2>
+    <h1>Setting up Liquibase in Spring</h1>
     <img src="/img/blogimg/liquibase/logoliquibase.png">
     <hr>
 
@@ -66,7 +68,7 @@
 
     <h3><strong>Get your hands dirty now 🛠👨🏾‍💻</strong></h3>
     <p>Now let's create a sample Spring project and an in-memory database to test the same. Here I will be using Java but again it's language independent, so feel free to try it out with any language that you have hands-on!</p>
-    <img src="image_url_here" alt="Sample Spring project">
+    <img src="/img/blogimg/liquibase/liqblogone.png" alt="Sample Spring project">
  
 
     <h3><strong>MasterChangeLog:</strong></h3>
@@ -120,17 +122,17 @@ spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
     </code></pre>
 
     <p>Now let's navigate to the test package and test this functionality quickly with a simple test:</p>
-    <img src="image_url_here" alt="Test functionality">
+    <img src="/img/blogimg/liquibase/liqblogtwo.png" alt="Test functionality">
 
 
     <p>Now if I run and query my logs, we can see that Liquibase is creating a table on the go and inserting the fields which we have mentioned and also querying them while fetching it:</p>
-    <img src="image_url_here" alt="Query logs">
+    <img src="/img/blogimg/liquibase/liqblogthree.png" alt="Query logs">
 
 
     <p>After running the changelog, you can verify that the data has been inserted correctly into the H2 database by querying the database using a tool such as H2’s built-in console, or by using a JDBC driver to connect to the database from your application code. This approach can be useful for managing small to medium-sized datasets or for bootstrapping a new database with initial data.</p>
  
 
-    <p>You can checkout the entire project in my <a href="github_link_here">GitHub</a>. Thanks for reading my post! If you’d like to connect with me and stay up-to-date on my latest articles, please feel free to follow me on <a href="twitter_link_here">Twitter</a> and connect with me on <a href="linkedin_link_here">LinkedIn</a>. I’m always looking to engage with fellow tech enthusiasts and discuss the latest industry trends! Drop me a message and let’s connect.</p>
+    <p>You can checkout the entire project in my <a href="https://github.com/ohyesgocool/spring-liquibase">GitHub</a>. Thanks for reading my post! If you’d like to connect with me and stay up-to-date on my latest articles, please feel free to follow me on <a href="https://twitter.com/gokulmenons">Twitter</a> and connect with me on <a href="https://www.linkedin.com/in/gokul-m-9a18b09b/">LinkedIn</a>. I’m always looking to engage with fellow tech enthusiasts and discuss the latest industry trends! Drop me a message and let’s connect.</p>
 
 
     <p>Happy coding ☕️ 🎧 ❤️</p>
